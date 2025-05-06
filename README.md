@@ -2,6 +2,10 @@
 
 A functional and replayable web re-creation of the Classic Game 'Battleship'. The Final Project for The Javascript Course of the Odin Project.
 
+## Stack
+
+[![My Skills](https://skillicons.dev/icons?i=html,css,javascript,webpack)](https://skillicons.dev)
+
 ## Getting Started
 
 Fork this repository [by following this guide.](https://docs.github.com/en/pull-requests/collaborating-with-pull-requests/working-with-forks/fork-a-repo)
