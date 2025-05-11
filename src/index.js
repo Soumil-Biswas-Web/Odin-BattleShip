@@ -10,6 +10,7 @@ const init = () => {
     startButton.addEventListener("click", () => {
         console.log("New Game Button clicked.");
         displayText.textContent = "Your Turn, Click on one of the Opponent's tiles to fire on.";
+        displayText.classList.remove("oppMsg");
         gameDriver(10, displayText); // Function to actually control the game
     })
 }

@@ -37,7 +37,9 @@ export function gameDriver(size = 10, displayText) {
             // Display all ships on the player's side
             displayShips(player1.board, player2.board);            
             if (winner === player1) displayText.textContent = "Congratulations! You won!";
+            displayText.classList.remove("oppMsg");
             if (winner === player2) displayText.textContent = "The opponent won. Better luck next time!";
+            displayText.classList.add("oppMsg");
 
             return winner;
         }
@@ -49,17 +51,20 @@ export function gameDriver(size = 10, displayText) {
             currentPlayer = currentOpp;            
             currentOpp = temp;
             if (currentPlayer.isCPU) displayText.textContent = "Adversary's Turn. The Opponent is Thinking...";
+            displayText.classList.add("oppMsg");
         }
         else {
             console.log("Hit enemy ship!")
             if(currentOpp.isCPU){
                 setTimeout(() => {                
                     displayText.textContent = "You hit and Enemy Ship! You get a free turn!";
+                    displayText.classList.remove("oppMsg");
                 }, 100)
             }
             else {
                 setTimeout(() => {                
                     displayText.textContent = "The Enemy hit a ship! A free turn for them!";
+                    displayText.classList.add("oppMsg");
                 }, 100)
             }
         };
@@ -79,6 +84,7 @@ export function gameDriver(size = 10, displayText) {
             setTimeout(() => {                
                 console.log("CPU's turn");
                 displayText.textContent = "Adversary's Turn. The Opponent is Thinking...";
+                displayText.classList.add("oppMsg");
                 let success = false;
                 while (!success) {
                     coords = cpuTakeShot(coords);
@@ -96,6 +102,7 @@ export function gameDriver(size = 10, displayText) {
         else {
             console.log("Player's turn");
             displayText.textContent = "Your Turn, Click on one of the Opponent's tiles to fire on.";
+            displayText.classList.remove("oppMsg");
             let success = false;
             while (!success) {
                 deActivateBoard();
@@ -107,6 +114,7 @@ export function gameDriver(size = 10, displayText) {
                 } catch (error) {
                     console.error(error);
                     displayText.textContent = "You Cannot click on the same Tile Twice! Try Again.";
+                    displayText.classList.remove("oppMsg");
                 }
             }            
         }

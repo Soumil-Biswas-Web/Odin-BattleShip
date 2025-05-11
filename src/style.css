@@ -79,6 +79,10 @@ button:hover {
     color: azure;
 }
 
+.content .oppMsg {
+    color: pink
+}
+
 #player-table .activated{
     cursor: pointer;
 }
