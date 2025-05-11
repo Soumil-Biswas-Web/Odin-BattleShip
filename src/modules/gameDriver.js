@@ -2,6 +2,7 @@ import { activateBoard, deActivateBoard } from "./activateBoard";
 import { displayShips, clearOppsAdjacents } from "./displayShips";
 import { gameBoard } from "./gameBoard";
 import { player } from "./player";
+import { clickSound, defeatSound, explodeSound, fireShotSound, playSound, victorySound } from "./sounds";
 
 // Initializes and drives the game forward, until the win condition is met for either player
 export function gameDriver(size = 10, displayText) {
@@ -30,16 +31,23 @@ export function gameDriver(size = 10, displayText) {
         // Write function for what happens on hit
         isHit = currentOpp.board.recieveAttack(coords.x,coords.y);
         console.log("Received attack at ["+coords.x+","+coords.y+"]");
+        playSound(fireShotSound);
     
         // // If all ships for opponent are sunk, declare winner.
         if (currentOpp.board.loss()) {
             winner = currentPlayer;
             // Display all ships on the player's side
             displayShips(player1.board, player2.board);            
-            if (winner === player1) displayText.textContent = "Congratulations! You won!";
-            displayText.classList.remove("oppMsg");
-            if (winner === player2) displayText.textContent = "The opponent won. Better luck next time!";
-            displayText.classList.add("oppMsg");
+            if (winner === player1) {
+                displayText.textContent = "Congratulations! You won!";
+                playSound(victorySound);
+                displayText.classList.remove("oppMsg");
+            }
+            if (winner === player2) {
+                displayText.textContent = "The opponent won. Better luck next time!";
+                playSound(defeatSound);
+                displayText.classList.add("oppMsg");
+            }
 
             return winner;
         }
@@ -57,13 +65,15 @@ export function gameDriver(size = 10, displayText) {
             console.log("Hit enemy ship!")
             if(currentOpp.isCPU){
                 setTimeout(() => {                
-                    displayText.textContent = "You hit and Enemy Ship! You get a free turn!";
+                    displayText.textContent = "You hit an Enemy Ship! You get a free turn!";
+                    playSound(explodeSound);
                     displayText.classList.remove("oppMsg");
                 }, 100)
             }
             else {
                 setTimeout(() => {                
                     displayText.textContent = "The Enemy hit a ship! A free turn for them!";
+                    playSound(explodeSound);
                     displayText.classList.add("oppMsg");
                 }, 100)
             }
@@ -143,6 +153,8 @@ export function gameDriver(size = 10, displayText) {
     randomizeButton.addEventListener("click", () => {
         player1.board.placeRandom();
         displayShips(player1.board, player2.board);
+        playSound(clickSound);
+        // console.log("pop");
     })
 
     return {
