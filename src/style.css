@@ -2,6 +2,10 @@
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
+:root{
+    --box-size: min(9vw, 40px);
+}
+
 body{
     margin: 0;
     background-image: linear-gradient(gray, black);
@@ -38,7 +42,7 @@ header{
 .content .divider {
     margin-top: 50px;
     justify-content: center;
-    gap: 5%;
+    gap: 10px;
 }
 
 .content h3 {
@@ -47,7 +51,7 @@ header{
 
 .table{
     display: grid;
-    grid-template: repeat(10, 40px) / repeat(10, 40px);
+    grid-template: repeat(10, var(--box-size)) / repeat(10, var(--box-size));
     box-shadow: azure 0 0 5px 3px;
 }
 
@@ -124,4 +128,11 @@ button:hover {
 footer{
     padding: 50px 0;
     color: azure;
+}
+
+@media (max-width: 900px) {
+    .content > div {
+        flex-direction: column;
+        align-items: center;
+    }
 }
